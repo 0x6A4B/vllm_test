@@ -4,8 +4,6 @@ services:
   vllm_server:
     image: docker.io/vllm/vllm-openai:latest
     container_name: vllm_server
-    networks:
-      - docker_test_default
     ports:
       - "8000:8000"
     volumes:
@@ -29,9 +27,7 @@ services:
       --tool-call-parser hermes
     restart: unless-stopped
 
-networks:
-  docker_test_default:
-    external: true
+
 
 
       #--model TheBloke/Mistral-7B-Instruct-v0.2-AWQ

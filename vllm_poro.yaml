@@ -4,8 +4,6 @@ services:
   vllm_server:
     image: docker.io/vllm/vllm-openai:latest
     container_name: vllm_server
-    networks:
-      - docker_test_default
     ports:
       - "8000:8000"
     volumes:
@@ -30,6 +28,4 @@ services:
       --max-num-seqs 32
     restart: unless-stopped
 
-networks:
-  docker_test_default:
-    external: true
+
