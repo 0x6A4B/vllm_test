@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  vllm_server:
+    image: docker.io/vllm/vllm-openai:latest
+    container_name: vllm_server
+    networks:
+      - docker_test_default
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HF_TOKEN}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    shm_size: 16g
+    command: >
+      --model TheBloke/Poro-34B-AWQ
+      --quantization awq
+      --enable-auto-tool-choice
+      --tool-call-parser hermes
+      --max-model-len 16384
+      --gpu-memory-utilization 0.85
+      --max-num-seqs 32
+    restart: unless-stopped
+
+networks:
+  docker_test_default:
+    external: true

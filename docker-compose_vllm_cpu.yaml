@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  vllm_cpu_server:
+    image: openeuler/vllm-cpu:latest
+    container_name: vllm_cpu_server
+    networks:
+      - docker_test_default
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HF_TOKEN}
+    shm_size: 4g
+    command: >
+      --model facebook/opt-125m
+      --dtype float16
+      --max-model-len 512
+      --max-num-seqs 1
+    restart: unless-stopped
+
+networks:
+  docker_test_default:
+    external: true
