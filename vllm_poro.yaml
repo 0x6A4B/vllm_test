@@ -20,7 +20,7 @@ services:
     shm_size: 16g
     command: >
       --model TheBloke/Poro-34B-AWQ
-      --quantization awq
+      --quantization awq_marlin
       --enable-auto-tool-choice
       --tool-call-parser hermes
       --max-model-len 16384
@@ -29,3 +29,4 @@ services:
     restart: unless-stopped
 
 
+# --quantization awq

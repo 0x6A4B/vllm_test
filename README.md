@@ -1,4 +1,4 @@
-Docker asennetaan pakettien hallintaan
+## Docker asennetaan pakettien hallintaan
 
 ```bash
 # Add Docker's official GPG key:
@@ -24,6 +24,8 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
+
+## Kun Docker on asennettu
 
 Verify docker service is running and enabled (starts on reboot)
 ```bash
